@@ -1,1 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roommates</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    height: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  video {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+  #gate {
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    text-align: center;
+  }
+  #gate input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    margin-top: 12px;
+  }
+  #gate button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    margin-top: 12px;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  #error {
+    color: #f66;
+    margin-top: 10px;
+    display: none;
+  }
+</style>
+</head>
+<body>
+  <div id="gate">
+    <p>Enter password to view</p>
+    <input type="password" id="pw" placeholder="Password">
+    <button onclick="checkPw()">Go</button>
+    <p id="error">Wrong password, try again.</p>
+  </div>
+  <video id="vid" src="roommates.mp4" controls playsinline style="display:none;"></video>
 
+  <script>
+    const PASSWORD = "Tischbeinstraat25B";
+    function checkPw() {
+      const entered = document.getElementById('pw').value;
+      if (entered === PASSWORD) {
+        document.getElementById('gate').style.display = 'none';
+        const vid = document.getElementById('vid');
+        vid.style.display = 'block';
+        vid.play();
+      } else {
+        document.getElementById('error').style.display = 'block';
+      }
+    }
+    document.getElementById('pw').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') checkPw();
+    });
+  </script>
+</body>
+</html>
